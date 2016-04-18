@@ -1,16 +1,16 @@
 (function ($) {
   $.fn.yu = function (option) {
-    //定义默认项目
-    var moren = {
-      'color': 'red',
+    //默认值
+    var defaults = {
+      'color': 'yellow',
       'fontSize': '50px'
     };
-    //  设置,如果option有值,就将option的值代替默认值.
-    var settings = $.extend(moren, option);
-
-    return this.css({
+    //  合并默认值,与参数.
+    var settings = $.extend({}, defaults, option);
+    //  将合并之后的值,显示出来.
+    return $(this).css({
       'color': settings.color,
       'fontSize': settings.fontSize
-    });
-  };
+    })
+  }
 })(jQuery);
