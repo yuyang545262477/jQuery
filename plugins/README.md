@@ -2,6 +2,7 @@
 ---
 
 #  1. [initial plugin](/initialPlugin/)
+#  1. [initial plugin](/initialPlugin/)
 
 
 
