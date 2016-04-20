@@ -1,7 +1,7 @@
 #   jQuery Plugins
 ---
 
-#  1. [initial_plugin](/initial_plugin/)
+#  1. [initial_plugin](/initialPlugin/)
 
 
 
