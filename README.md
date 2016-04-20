@@ -2,4 +2,4 @@
 ----
 
 ##  1.[API](/API/)
-##  2.[Plugin](/Plugins/)  
+##  2.[plugin](/plugin/)  
