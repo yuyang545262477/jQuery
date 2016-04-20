@@ -1,2 +1,5 @@
-# jQuery
-jQueryAPi解读，以及插件存放的地方。
+#jQuery
+----
+
+##  1.[API](/API/)
+##  2.[Plugin](/Plugin/)  
