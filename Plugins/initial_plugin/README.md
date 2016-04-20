@@ -1,11 +1,13 @@
 #initial_plugin
 ----
 
-#   step_one:
+#   step_list:
     
     //immediately-Invoked Function Expression (IIFE)
      (function($){
-        //expression
+        //  construct function
+        //  add prototype chain
+        //  initial function
      }(jQuery);
      
 #   construction of the Prototype
@@ -21,7 +23,8 @@
            };
            this.options = $.extend({},this.defaults,opt);
         };
-        
+        //  add prototype chain
+        //  initial it
     }(jQuery)
     
     
@@ -29,17 +32,7 @@
     
         (function($){
         
-            var beauty = function(ele,opt){
-               this.$element = ele;
-               this.defaults = {
-                    'color':'red',
-                    'fontSize':'50px',
-                    'textDecoration':'none'
-               };
-               this.options = $.extend({},this.defaults,opt);
-            };
-            
-            // prototype chain function
+           //   construct function
             
            beauty.prototype.full = function(){
                 return this.$element.css({
@@ -48,6 +41,8 @@
                     'textDecoration':this.options.fontSize
                 }) ;
            };
+           
+           // initial it
             
         }(jQuery)
         
@@ -55,28 +50,11 @@
 #   initial it.
         (function($){
         
-            var beauty = function(ele,opt){
-               this.$element = ele;
-               this.defaults = {
-                    'color':'red',
-                    'fontSize':'50px',
-                    'textDecoration':'none'
-               };
-               this.options = $.extend({},this.defaults,opt);
-            };
+            //  construct function
             
-            // prototype chain function
             
-           beauty.prototype.full = function(){
-                return this.$element.css({
-                    'color':this.options.color,
-                    'fontSize':this.options.fontSize,
-                    'textDecoration':this.options.fontSize
-                });
-           };
-           
-           //   initial it
-           
+            //  add prototype chain 
+                      
            $.fn.initial_plugin = function(option){
                 
                 var beauty = new beauty( this,  option);
