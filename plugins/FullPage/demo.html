@@ -45,30 +45,38 @@
             height: 100%;
         }
 
-        .left {
-            float: left;
-            width: 25%;
-        }
+        /*.left {*/
+        /*float: left;*/
+        /*width: 25%;*/
+        /*}*/
 
 
     </style>
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="app.js"></script>
 </head>
 <body>
-<div id="container" style="width: 400%">
+<div id="container">
     <div class="sections">
-        <div class="section left" id="section0">
+        <div class="section active" id="section0">
             <h3>this is the page</h3>
         </div>
-        <div class="section left" id="section1">
+        <div class="section" id="section1">
             <h3>this is the page</h3>
         </div>
-        <div class="section left" id="section2">
+        <div class="section" id="section2">
             <h3>this is the page</h3>
         </div>
-        <div class="section left" id="section3">
+        <div class="section" id="section3">
             <h3>this is the page</h3>
         </div>
     </div>
 </div>
+<script>
+    $('#container').switchPage({
+        loop:true,
+        direction: 'vertical'
+    });
+</script>
 </body>
 </html>
