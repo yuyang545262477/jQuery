@@ -1,0 +1,45 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+#container,
+.content {
+    height: 100%;
+    text-align: center;
+}
+
+/*对所有的背景图片做处理*/
+#content1,
+#content2,
+#section3,
+#content4 {
+    background-position: 50% 50%;
+    background-size: cover;
+    color: #fffe00;
+}
+
+#content1 {
+    background-image: url('./pic/1.jpg');
+}
+
+#content2 {
+    background-image: url('./pic/2.jpg');
+}
+
+#content3 {
+    background-image: url('./pic/3.jpg');
+}
+
+#content4 {
+    background-image: url('./pic/4.jpg');
+}
+
+
+
+
