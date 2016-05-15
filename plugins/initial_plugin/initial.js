@@ -27,9 +27,9 @@
     };
 
 //instantiation
-
     $.fn.yu = function (options) {
         var beauti = new beautifier(this, options);
         return beauti.beautify();
     };
+
 })(jQuery,window);

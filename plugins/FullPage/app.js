@@ -1,53 +1,53 @@
 (function ($) {
+//    defaults;
     var defaults = {
-        'container': '#container',//容器
-        'sections': '.section',//子容器
-        'easing': 'ease',//特效方式，ease-in,ease-out,linear
-        'duration': 1000,//每次动画执行的时间
-        'pagination': true,//是否显示分页
-        'loop': false,//是否循环
-        'keyboard': true,//是否支持键盘
-        'direction': 'vertical',//滑动的方向 horizontal,vertical,
-        'onpageSwitch': function (pagenum) {
+        'container': '#container',
+        'sections': '.section',
+        'easing': 'ease',
+        'duration': 300,
+        'pagination': true,
+        'loop': true,
+        'keyboard': true,
+        'direction': 'vertical',
+        'onpageSwitch': function () {
+            
         }
     };
-    
     var win = $(window),
-        container, sections;
+        container,
+        sections,
+        opts = {},
+        canScroll = true,
+        iIndex = 0,
+        arrElement = [];
     
-    var opts = {},
-        canScroll = true;
     
-    var iIndex = 0;
-    
-    var arrElement = [];
-    
-    var SP = $.fn.switchPage = function (options) {
+    var SP = $.fn.fullPage = function (options) {
         opts = $.extend({}, defaults, options || {});
         
-        container = $(opts.container),
-            sections = container.find(opts.sections);
+        container = $(opts.container);
+        sections = container.find(opts.sections);
         
         sections.each(function () {
             arrElement.push($(this));
         });
         
         return this.each(function () {
-            if (opts.direction == "horizontal") {
+            if (opts.direction == 'horizontal') {
                 initLayout();
             }
-            
             if (opts.pagination) {
                 initPagination();
             }
-            
             if (opts.keyboard) {
-                keyDown();
+                KeyDown();
             }
         });
+        
     };
-    
-    //滚轮向上滑动事件
+
+
+//    滚轮向上滑动事件
     SP.moveSectionUp = function () {
         if (iIndex) {
             iIndex--;
@@ -56,29 +56,34 @@
         }
         scrollPage(arrElement[iIndex]);
     };
-    
-    //滚轮向下滑动事件
+
+//    滚轮向下滑动事件
     SP.moveSectionDown = function () {
         if (iIndex < (arrElement.length - 1)) {
             iIndex++;
         } else if (opts.loop) {
             iIndex = 0;
         }
+        
         scrollPage(arrElement[iIndex]);
     };
-    
-    //私有方法
-    //页面滚动事件
+
+//    页面滚动事件
     function scrollPage(element) {
         var dest = element.position();
-        if (typeof dest === 'undefined') {
-            return;
+        if (typeof dest !== 'undefined') {
+            initEffects(dest, element);
         }
-        initEffects(dest, element);
     }
+
+//    重写鼠标滑动事件
     
-    //重写鼠标滑动事件
-    $(document).on("mousewheel DOMMouseScroll", MouseWheelHandler);
+    $(document).on('mousewheel DOMMouseScroll', MouseWheelHandler);
+    
+    
+    /**
+     * @return {boolean}
+     */
     function MouseWheelHandler(e) {
         e.preventDefault();
         var value = e.originalEvent.wheelDelta || -e.originalEvent.detail;
@@ -92,39 +97,37 @@
         }
         return false;
     }
+
+//    横向布局初始化
     
-    //横向布局初始化
     function initLayout() {
         var length = sections.length,
-            width = (length * 100) + "%",
-            cellWidth = (100 / length).toFixed(2) + "%";
-        container.width(width).addClass("left");
-        sections.width(cellWidth).addClass("left");
+            width = (length * 100) + '%',
+            cellWidth = (100 / length).toFixed(2) + '%';
+        container.width(width).addClass('left');
+        sections.width(cellWidth).addClass('left');
     }
-    
-    //初始化分页
+
+//    初始化分页
     function initPagination() {
         var length = sections.length;
-        if (length) {
-            
-        }
-        var pageHtml = '<ul id="pages"><li class="active"></li>';
+        var pageHtml = '<ul id="pages"><li class = "active"></li>';
         for (var i = 1; i < length; i++) {
             pageHtml += '<li></li>';
         }
         pageHtml += '</ul>';
-        $("body").append(pageHtml);
+        $('body').append(pageHtml);
     }
-    
-    //分页事件
+
+//    分页事件
     function paginationHandler() {
-        var pages = $("#pages").find("li");
-        pages.eq(iIndex).addClass("active").siblings().removeClass("active");
+        var pages = $('#pages').find('li');
+        pages.eq(iIndex).addClass('active').siblings().removeClass('active');
     }
-    
-    //是否支持css的某个属性
+
+//    是否支持css
     function isSuportCss(property) {
-        var body = $("body")[0];
+        var body = $('body')[0];
         for (var i = 0; i < property.length; i++) {
             if (property[i] in body.style) {
                 return true;
@@ -132,46 +135,51 @@
         }
         return false;
     }
-    
-    //渲染效果
+
+//    渲染效果
     function initEffects(dest, element) {
-        var transform = ["-webkit-transform", "-ms-transform", "-moz-transform", "transform"],
-            transition = ["-webkit-transition", "-ms-transition", "-moz-transition", "transition"];
+        var transform = [
+            '-webkit-transform', '-ms-transform', '-moz-transform', 'transform'
+        ];
+        var transition = ['-webkit-transition', '-ms-transition',
+            '-moz-transition',
+            'transition'];
+        var canScroll = false;
         
-        canScroll = false;
         if (isSuportCss(transform) && isSuportCss(transition)) {
-            var traslate = "";
-            if (opts.direction == "horizontal") {
-                traslate = "-" + dest.left + "px, 0px, 0px";
+            var translate = '';
+            if (opts.direction == 'horizontal') {
+                translate = '-' + dest.left + 'px,0px,0px';
             } else {
-                traslate = "0px, -" + dest.top + "px, 0px";
+                translate = '0px,-' + dest.top + 'px,0px';
             }
             container.css({
-                "transition": "all " + opts.duration + "ms " + opts.easing,
-                "transform": "translate3d(" + traslate + ")"
+                'transition': 'all ' + opts.duration + 'ms ' + opts.easing,
+                'transform': 'translate3d(' + translate + ')'
             });
-            container.on("webkitTransitionEnd msTransitionend mozTransitionend transitionend", function () {
+            container.on('webkitTransitionEnd msTransitionend mozTransitionend transitionend', function () {
                 canScroll = true;
             });
         } else {
-            var cssObj = (opts.direction == "horizontal") ? {left: -dest.left} : {top: -dest.top};
+            var cssObj = (opts.direction == 'horizontal') ? {left: -dest.left} : {top: -dest.top};
             container.animate(cssObj, opts.duration, function () {
                 canScroll = true;
             });
         }
-        element.addClass("active").siblings().removeClass("active");
+        element.addClass('active').siblings().removeClass('active');
         if (opts.pagination) {
             paginationHandler();
         }
+        
     }
-    
-    //窗口Resize
+
+//    窗口的resize
     var resizeId;
     win.resize(function () {
         clearTimeout(resizeId);
         resizeId = setTimeout(function () {
             reBuild();
-        }, 500);
+        }, 20);
     });
     
     function reBuild() {
@@ -179,38 +187,43 @@
             currentWidth = win.width();
         
         var element = arrElement[iIndex];
-        if (opts.direction == "horizontal") {
+        if (opts.direction == 'horizontal') {
             var offsetLeft = element.offset().left;
             if (Math.abs(offsetLeft) > currentWidth / 2 && iIndex < (arrElement.length - 1)) {
                 iIndex++;
             }
-        } else {
-            var offsetTop = element.offset().top;
-            if (Math.abs(offsetTop) > currentHeight / 2 && iIndex < (arrElement.length - 1)) {
-                iIndex++;
+            else {
+                var offsetTop = element.offset().top;
+                if (Math.abs(offsetTop) > currentHeight / 2 && iIndex < (arrElement.length - 1)) {
+                    iIndex++;
+                }
             }
         }
         if (iIndex) {
             paginationHandler();
-            var cuerrentElement = arrElement[iIndex],
-                dest = cuerrentElement.position();
-            initEffects(dest, cuerrentElement);
+            var currentElement = arrElement[iIndex],
+                dest = currentElement.position();
+            initEffects(dest, currentElement);
+            
         }
+        
     }
-    
-    //绑定键盘事件
-    function keyDown() {
+
+//    增加键盘事件
+    function KeyDown() {
         var keydownId;
         win.keydown(function (e) {
             clearTimeout(keydownId);
             keydownId = setTimeout(function () {
-                var keyCode = e.keyCode;
-                if (keyCode == 37 || keyCode == 38) {
+                var KeyCode = e.keyCode;
+                if (KeyCode == 37 || KeyCode == 38) {
                     SP.moveSectionUp();
-                } else if (keyCode == 39 || keyCode == 40) {
+                } else if (KeyCode == 39 || KeyCode == 40) {
                     SP.moveSectionDown();
                 }
             }, 150);
         });
     }
+    
+    
 })(jQuery);

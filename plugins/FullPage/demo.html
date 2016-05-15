@@ -3,79 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>FullPage jQuery Demo</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        #section0,
-        #section1,
-        #section2,
-        #section3 {
-            background-color: #000;
-            background-size: cover;
-            background-position: 50% 50%;
-            text-align: center;
-            color: white;
-        }
-
-        #section0 {
-            background-image: url(images/1.jpg);
-        }
-
-        #section1 {
-            background-image: url(images/2.jpg);
-        }
-
-        #section2 {
-            background-image: url(images/3.jpg);
-        }
-
-        #section3 {
-            background-image: url(images/4.jpg);
-        }
-
-        html, body {
-            height: 100%;
-            /*overflow: hidden;*/
-        }
-
-        #container, .sections, .section {
-            height: 100%;
-        }
-
-        /*.left {*/
-        /*float: left;*/
-        /*width: 25%;*/
-        /*}*/
-
-
-    </style>
+    <link rel="stylesheet" href="fullpage.css">
     <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="app.js"></script>
 </head>
 <body>
 <div id="container">
-    <div class="sections">
-        <div class="section active" id="section0">
-            <h3>this is the page</h3>
-        </div>
-        <div class="section" id="section1">
-            <h3>this is the page</h3>
-        </div>
-        <div class="section" id="section2">
-            <h3>this is the page</h3>
-        </div>
-        <div class="section" id="section3">
-            <h3>this is the page</h3>
-        </div>
+    <div class="section active" id="section0">
+        <h1>this is the page</h1>
+    </div>
+    <div class="section" id="section1">
+        <h1>this is the page</h1>
+    </div>
+    <div class="section" id="section2">
+        <h1>this is the page</h1>
+    </div>
+    <div class="section" id="section3">
+        <h1>this is the page</h1>
     </div>
 </div>
 <script>
-    $('#container').switchPage({
-        loop:true,
-        direction: 'vertical'
+    $('#container').fullPage({
+        loop: false,
+        direction: 'horizontal',
+        duration: 1000
     });
 </script>
 </body>
