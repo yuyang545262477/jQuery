@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Full Page Plugin</title>
+    <link rel="stylesheet" href="fullpage.css">
+</head>
+<body>
+<div id="container">
+    <div class="content active" id="content1">
+        <h1>this is the page1</h1>
+    </div>
+    <div class="content" id="content2">
+        <h1>this is the page2</h1>
+    </div>
+    <div class="content" id="content3">
+        <h1>this is the page3</h1>
+    </div>
+    <div class="content" id="content4">
+        <h1>this is the page4</h1>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+<script src="fullpage.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#container').Fullpage({
+            loop: true,
+            click: false,
+            keyboard: true
+        })
+    })
+</script>
+</body>
+</html>

@@ -3,43 +3,29 @@
     margin: 0;
 }
 
-html, body {
+html, body ,#container,.content{
     height: 100%;
     overflow: hidden;
 }
 
-#container,
-.content {
-    height: 100%;
+.content{
+    
+    background-position: 50% 50%;
+    -webkit-background-size:cover;
+    background-size:cover;
     text-align: center;
 }
 
-/*对所有的背景图片做处理*/
-#content1,
-#content2,
-#section3,
-#content4 {
-    background-position: 50% 50%;
-    background-size: cover;
-    color: #fffe00;
+#content1{
+    background-color: cornsilk;
 }
-
-#content1 {
-    background-image: url('./pic/1.jpg');
+#content2{
+    background-color: cyan;
 }
-
-#content2 {
-    background-image: url('./pic/2.jpg');
+#content3{
+    background-color: cadetblue;
 }
-
-#content3 {
-    background-image: url('./pic/3.jpg');
+#content4{
+    background-color: chocolate;
 }
-
-#content4 {
-    background-image: url('./pic/4.jpg');
-}
-
-
-
 
